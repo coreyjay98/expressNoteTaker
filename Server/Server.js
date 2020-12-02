@@ -5,6 +5,8 @@ const fs = require("fs");
 const Note = require("./Note");
 const db = require("../db/db.json");
 const { postData } = require("./write");
+const { searchAndDelete } = require("./write");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -23,8 +25,12 @@ app.get("/api/notes", function (req, res) {
 });
 
 app.post("/api/notes", function (req, res) {
-  console.log(req.body);
   postData(req);
+  res.json(db);
+});
+
+app.delete("/api/notes/:id", function (req, res) {
+  searchAndDelete(req.params);
   res.json(db);
 });
 
