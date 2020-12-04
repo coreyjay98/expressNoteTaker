@@ -4,6 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const { searchAndDelete, simpleNote } = require("./Server/write");
 
+const port = process.env.PORT || 80;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -43,6 +45,6 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./public/", "index.html"));
 });
 
-app.listen(3000, function () {
-  console.log("I am listening on port 3000");
+app.listen(port, function () {
+  console.log("I am listening on port", port);
 });
