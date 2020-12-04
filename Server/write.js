@@ -16,7 +16,7 @@ async function searchAndDelete(obj) {
     (v, i, a) =>
       a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
   );
-  fs.writeFile("../db/db.json", JSON.stringify(filt), function (err) {
+  fs.writeFile("./db/db.json", JSON.stringify(filt), function (err) {
     if (err) console.log(err);
     console.log("Deleted");
   });
@@ -35,7 +35,7 @@ async function simpleNote(body) {
     (v, i, a) =>
       a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
   );
-  fs.writeFile("../db/db.json", JSON.stringify(filt), function (err) {
+  fs.writeFile("./db/db.json", JSON.stringify(filt), function (err) {
     if (err) console.log(err);
     console.log("Saved");
   });
@@ -43,7 +43,7 @@ async function simpleNote(body) {
 }
 
 async function simpleRead() {
-  const notesBuffer = await fs.readFile("../db/db.json");
+  const notesBuffer = await fs.readFile("./db/db.json");
   const notes = await JSON.parse(notesBuffer);
   return notes;
 }
