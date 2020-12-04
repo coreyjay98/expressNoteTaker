@@ -2,15 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const fs = require("fs");
-const Note = require("./Server/Note");
-const db = require("./db/db.json");
-const { postData, newNotes } = require("./Server/write");
-const {
-  searchAndDelete,
-  readDB,
-  simpleNote,
-  simpleRead,
-} = require("./Server/write");
+const { searchAndDelete, simpleNote } = require("./write");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,7 +17,6 @@ app.get("/api/notes", function (req, res) {
   fs.readFile("../db/db.json", function (err, data) {
     if (err) console.log(err);
     let stored = JSON.parse(data);
-    console.log("stored", stored);
     res.json(stored);
   });
 });
@@ -35,7 +26,6 @@ app.post("/api/notes", function (req, res) {
   fs.readFile("../db/db.json", function (err, data) {
     if (err) console.log(err);
     let stored = JSON.parse(data);
-    console.log("stored", stored);
     res.json(stored);
   });
 });
@@ -45,7 +35,6 @@ app.delete("/api/notes/:id", function (req, res) {
   fs.readFile("../db/db.json", function (err, data) {
     if (err) console.log(err);
     let stored = JSON.parse(data);
-    console.log("stored", stored);
     res.json(stored);
   });
 });
