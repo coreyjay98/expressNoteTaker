@@ -4,8 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const Note = require("./Note");
 const db = require("../db/db.json");
-const { postData } = require("./write");
-const { searchAndDelete } = require("./write");
+const { postData, newNotes } = require("./write");
+const { searchAndDelete, readDB, simpleNote, simpleRead } = require("./write");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,18 +20,29 @@ app.get("/api/notes", function (req, res) {
   fs.readFile("../db/db.json", function (err, data) {
     if (err) console.log(err);
     let stored = JSON.parse(data);
-    res.send(stored);
+    console.log("stored", stored);
+    res.json(stored);
   });
 });
 
 app.post("/api/notes", function (req, res) {
-  postData(req);
-  res.json(db);
+  simpleNote(req.body);
+  fs.readFile("../db/db.json", function (err, data) {
+    if (err) console.log(err);
+    let stored = JSON.parse(data);
+    console.log("stored", stored);
+    res.json(stored);
+  });
 });
 
 app.delete("/api/notes/:id", function (req, res) {
   searchAndDelete(req.params);
-  res.json(db);
+  fs.readFile("../db/db.json", function (err, data) {
+    if (err) console.log(err);
+    let stored = JSON.parse(data);
+    console.log("stored", stored);
+    res.json(stored);
+  });
 });
 
 app.get("*", function (req, res) {
