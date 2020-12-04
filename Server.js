@@ -2,10 +2,15 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const fs = require("fs");
-const Note = require("./Note");
-const db = require("../db/db.json");
-const { postData, newNotes } = require("./write");
-const { searchAndDelete, readDB, simpleNote, simpleRead } = require("./write");
+const Note = require("./Server/Note");
+const db = require("./db/db.json");
+const { postData, newNotes } = require("./Server/write");
+const {
+  searchAndDelete,
+  readDB,
+  simpleNote,
+  simpleRead,
+} = require("./Server/write");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
